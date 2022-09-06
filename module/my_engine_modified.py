@@ -96,27 +96,23 @@ def render_data(img_front, img_back):
 
     # img size
     # plt.figure(figsize=(2, 5))
-    fig = plt.figure()
+    fig = plt.figure(frameon=False)
     fig.set_figwidth(2)
-    fig.set_figheight(6)
-    # for i in range(n):
+    fig.set_figheight(5)
+
+    # this for disabling the bg
+    ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax.set_axis_off()
+    fig.add_axes(ax)
     
     # depan
     # plt.subplot(2, n*2, (2*i)+1)
-    plt.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
-    plt.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
+    ax.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
+    ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
 
     # belakang
     # plt.subplot(2, n*2, (2*i)+2)
     # plt.imshow(X_valid[vl_idx[i]][1].permute(1, 2, 0))
     # plt.imshow(map_clr(y_predv[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=0.5)
-
-        # plt.subplot(2, n*2, (n*2)+(2*i)+1)
-        # plt.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
-        # plt.imshow(map_clr(y_valid[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
-
-        # plt.subplot(2, n*2, (n*2)+(2*i)+2)
-        # plt.imshow(X_valid[vl_idx[i]][1].permute(1, 2, 0))
-        # plt.imshow(map_clr(y_valid[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=0.5)
 
     plt.savefig('./static/hasil.png')
