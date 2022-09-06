@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My Home</title>
+	</head>
+	<body>
+		<h1>BTTRFLY Module</h1>
+		<span>
+			<a href="{{ url_for('home') }}">
+				<button>Render again</button>
+			</a>
+		</span>
+		<hr />
+		<!-- <img src="../static/coca.jpeg" alt="" /> -->
+		<!-- <img src="{{ url_for('static', filename='coca.jpeg') }}" alt="" /> -->
+		<p>Hasil render</p>
+		<img src="{{ url_for('static', filename='hasil.png') }}" />
+		<!-- <p>Figure 2</p>
+		<img
+			src="{{ url_for('static', filename='btr_200.png') }}"
+			alt=""
+			width="700"
+		/> -->
+	</body>
+</html>

@@ -1,2 +1,4 @@
+model
 __pycache__
-kupu_env/
+env/
+.vscode/
