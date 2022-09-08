@@ -110,9 +110,11 @@ def render_data(img_front, img_back):
     ax.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
     ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
 
+    plt.savefig('./static/img_front_result.png')
+
     # belakang
     # plt.subplot(2, n*2, (2*i)+2)
-    # plt.imshow(X_valid[vl_idx[i]][1].permute(1, 2, 0))
-    # plt.imshow(map_clr(y_predv[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=0.5)
+    ax.imshow(X_valid[vl_idx[i]][1].permute(1, 2, 0))
+    ax.imshow(map_clr(y_predv[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=0.5)
 
-    plt.savefig('./static/hasil.png')
+    plt.savefig('./static/img_back_result.png')

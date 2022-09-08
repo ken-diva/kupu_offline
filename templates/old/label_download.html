@@ -51,12 +51,12 @@
 		<script>
 			var labelStudio = new LabelStudio("label-studio", {
 				config: `
-          <View>
-            <Image name="img" value="$image"></Image>
-            <RectangleLabels name="tag" toName="img">
-              <Label value="Hello"></Label>
-              <Label value="World"></Label>
-            </RectangleLabels>
+			       <View>
+			         <Image name="img" value="$image"></Image>
+			         <RectangleLabels name="tag" toName="img">
+			           <Label value="Hello"></Label>
+			           <Label value="World"></Label>
+			         </RectangleLabels>
 			     </View>
 			  `,
 
@@ -93,6 +93,16 @@
 				},
 
 				onSubmitAnnotation: function (LS, annotation) {
+					var file = document.createElement("file");
+					var file = new Blob(
+						[JSON.stringify(annotation.serializeAnnotation())],
+						{
+							type: "application/json",
+						}
+					);
+					file.href = URL.createObjectURL(file);
+					file.download = "coba.txt";
+					file.click();
 					// retrive an annotation
 					console.log(annotation.serializeAnnotation());
 				},

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Back Result | Kupu Web Module</title>
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+			crossorigin="anonymous"
+		/>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- Include Label Studio stylesheet -->
+		<link
+			href="https://unpkg.com/label-studio@latest/build/static/css/main.css"
+			rel="stylesheet"
+		/>
+
+		<!-- Include the Label Studio library -->
+		<script src="https://unpkg.com/label-studio@latest/build/static/js/main.js"></script>
+	</head>
+	<body>
+		<!-- Heading -->
+		<nav class="navbar bg-light">
+			<div class="container-fluid">
+				<span class="navbar-brand mb-0 h1">
+					<div class="text-secondary">Kupu Web Module</div>
+				</span>
+				<span class="badge rounded-pill text-bg-primary">v0.1 (Demo)</span>
+			</div>
+		</nav>
+
+		<!-- Create the Label Studio container -->
+		<div class="container mt-4">
+			<div class="d-flex justify-content-center mt-2">
+				<h1>Edit the Back result</h1>
+			</div>
+			<div id="label-studio"></div>
+		</div>
+
+		<!-- Initialize Label Studio -->
+		<script>
+			var labelStudio = new LabelStudio("label-studio", {
+				config: `
+			       <View>
+			         <Image name="img_back" value="$image"></Image>
+			         <RectangleLabels name="img_back_tag" toName="img_back">
+			           <Label value="Hello"></Label>
+			           <Label value="World"></Label>
+			         </RectangleLabels>
+			     </View>
+			  `,
+
+				interfaces: ["update", "controls", "side-column", "annotations:menu"],
+
+				user: {
+					pk: 1,
+					firstName: "Admin",
+					lastName: "Admin",
+				},
+				task: {
+					annotations: [],
+					predictions: [],
+					id: 1,
+					data: {
+						image: "{{ url_for('static', filename='img_back_result.png') }}",
+					},
+				},
+
+				onLabelStudioLoad: function (LS) {
+					var c = LS.annotationStore.addAnnotation({
+						userGenerate: true,
+					});
+					LS.annotationStore.selectAnnotation(c.id);
+				},
+
+				onUpdateAnnotation: function (LS, annotation) {
+					fetch("/export_back", {
+						headers: {
+							"Content-Type": "application/json",
+						},
+						method: "POST",
+						body: JSON.stringify(annotation.serializeAnnotation()),
+					})
+						.then(function (response) {
+							if (response.ok) {
+								response.json().then(function (response) {
+									alert("Annotasi berhasil diupdate!");
+									console.log(response);
+								});
+							} else {
+								throw Error("Something went wrong");
+							}
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+					console.log(annotation.serializeAnnotation());
+				},
+
+				onSubmitAnnotation: function (LS, annotation) {
+					fetch("/export_back", {
+						headers: {
+							"Content-Type": "application/json",
+						},
+						method: "POST",
+						body: JSON.stringify(annotation.serializeAnnotation()),
+					})
+						.then(function (response) {
+							if (response.ok) {
+								response.json().then(function (response) {
+									alert("Annotasi berhasil disimpan!");
+									console.log(response);
+								});
+							} else {
+								throw Error("Something went wrong");
+							}
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+					console.log(annotation.serializeAnnotation());
+				},
+			});
+		</script>
+	</body>
+</html>

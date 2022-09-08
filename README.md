@@ -15,3 +15,8 @@ For developer ☕
 - Create folder named _model_ and then move **.pt** model there
 - Run the app with `flask --debug run` command
   - `--debug` is optional and for convenient only 👌
+
+Resources 🏗️
+
+- [Label Studio](https://labelstud.io/)
+- [VGG Image Annotator (VIA)](https://www.robots.ox.ac.uk/~vgg/software/via/)
