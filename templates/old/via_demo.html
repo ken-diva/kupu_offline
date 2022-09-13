@@ -1196,6 +1196,21 @@ function _via_init() {
     }, 100);
   }
 
+  // run here!
+  function _via_load_submodules() {
+    var image_url_list = [
+      'static/img_front_result.png',
+      'static/img_back_result.png',
+      ]
+    var n = image_url_list.length;
+    for ( var i = 0; i < n; ++i ) {
+      project_file_add_url( image_url_list[i] ); // add image using URL to project
+    }
+  
+    _via_show_img(0);       // show the first image
+    update_img_fn_list();   // update image filename list (on left side bar)
+  }
+
 }
 
 function _via_init_reg_canvas_context() {
