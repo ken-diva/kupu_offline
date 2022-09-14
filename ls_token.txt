@@ -1,0 +1,4 @@
+6510e1e1448f1b5cb9bd45cfd0fa0b4f6341cb04
+
+
+curl -X GET http://localhost:8080/api/projects/ -H 'Authorization: Token 6510e1e1448f1b5cb9bd45cfd0fa0b4f6341cb04'

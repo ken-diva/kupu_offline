@@ -51,13 +51,13 @@
 		<script>
 			var labelStudio = new LabelStudio("label-studio", {
 				config: `
-			       <View>
-			         <Image name="img_back" value="$image"></Image>
-			         <BrushLabels name="img_back_tag" toName="img_back">
-			           <Label value="Hello"></Label>
-			           <Label value="World"></Label>
-			         </BrushLabels>
-			     </View>
+				<View>
+					<Image name="image" value="$image" zoom="true" rotateControl="true" zoomControl="true"/>
+					<BrushLabels name="tag" toName="image">
+						<Label value="Planet" background="rgba(0, 0, 255, 0.7)"/>
+						<Label value="Moonwalker" background="rgba(255, 0, 0, 0.7)"/>
+					</BrushLabels>
+				</View>
 			  `,
 
 				interfaces: ["update", "controls", "side-column", "annotations:menu"],
