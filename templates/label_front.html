@@ -51,13 +51,23 @@
 		<script>
 			var labelStudio = new LabelStudio("label-studio", {
 				config: `
-			       <View>
-			         <Image name="img_front" value="$image"></Image>
-			         <RectangleLabels name="img_front_tag" toName="img_front">
-			           <Label value="Hello"></Label>
-			           <Label value="World"></Label>
-			         </RectangleLabels>
-			     </View>
+				<View>
+					<Image name="image" value="$image" zoom="true" rotateControl="true" zoomControl="true"/>
+					<BrushLabels name="tag" toName="image">
+						<Label value="Skull" background="rgba(21, 193, 78, 0.7)"/>
+						<Label value="Cervical Vert" background="rgba(0, 121, 255, 0.7)"/>
+						<Label value="Thoracic Vert" background="rgba(0, 228, 255, 0.7)"/>
+						<Label value="Clavicle" background="rgba(109, 21, 193, 0.7)"/>
+						<Label value="Ribs" background="rgba(228, 70, 206, 0.7)"/>
+						<Label value="Scapula" background="rgba(224, 131, 46, 0.7)"/>
+						<Label value="Sternum" background="rgba(129, 64, 4, 0.7)"/>
+						<Label value="Humerus" background="rgba(14, 24, 156, 0.7)"/>
+						<Label value="Lumbar Vert" background="rgba(235, 210, 52, 10.7)"/>
+						<Label value="Sacrum" background="rgba(255, 122, 0, 0.7)"/>
+						<Label value="Pelvis" background="rgba(16, 119, 7, 0.7)"/>
+						<Label value="Femur" background="rgba(225, 235, 52, 0.7)"/>
+					</BrushLabels>
+				</View>
 			  `,
 
 				interfaces: ["update", "controls", "side-column", "annotations:menu"],
