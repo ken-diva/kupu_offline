@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Front Result | Kupu Web Module</title>
 
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-			crossorigin="anonymous"
-		/>
-		<script
-			defer
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-			crossorigin="anonymous"
-		></script>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+	<title>Front Result | Kupu Web Module</title>
 
-		<!-- Include Label Studio stylesheet -->
-		<link
-			href="https://unpkg.com/label-studio@latest/build/static/css/main.css"
-			rel="stylesheet"
-		/>
+	<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+	<script src="/static/js/config.js"></script>
 
-		<!-- Include the Label Studio library -->
-		<script src="https://unpkg.com/label-studio@latest/build/static/js/main.js"></script>
-	</head>
-	<body>
-		<!-- Heading -->
-		<nav class="navbar bg-light">
-			<div class="container-fluid">
-				<span class="navbar-brand mb-0 h1">
-					<div class="text-secondary">Kupu Web Module</div>
-				</span>
-				<span class="badge rounded-pill text-bg-primary">v0.1 (Demo)</span>
-			</div>
-		</nav>
+	<link rel="stylesheet" href="/static/style/styles.css" />
+	<script defer src="/static/js/logout.js"></script>
 
-		<!-- Create the Label Studio container -->
-		<div class="container mt-4">
-			<div class="d-flex justify-content-center mt-2">
-				<h1>Edit the Front result</h1>
-			</div>
-			<div id="label-studio"></div>
+	<!-- Include Label Studio stylesheet -->
+	<link href="https://unpkg.com/label-studio@latest/build/static/css/main.css" rel="stylesheet" />
+
+	<!-- Include the Label Studio library -->
+	<script src="https://unpkg.com/label-studio@latest/build/static/js/main.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div>
+			<div class="header-text">Kupu Web Module</div>
+			<div class="header-ver">v0.1 (demo)</div>
 		</div>
+		<div>
+			<div class="header-text">Hi, Ema Rachma</div>
+			<button type="button" class="header-button" id="signOut" onclick="signOut()">
+				Logout
+			</button>
+		</div>
+	</div>
 
-		<!-- Initialize Label Studio -->
-		<script>
-			var labelStudio = new LabelStudio("label-studio", {
-				config: `
+	<div class="box" id="v-default">
+		<h1>Edit Front result</h1>
+	</div>
+
+	<span class="box" id="v-signout">
+		<h1>Signing Out...</h1>
+	</span>
+
+	<div class="box-annotation">
+		<div id="label-studio"></div>
+	</div>
+
+	<div class="box">
+		<a href="{{ url_for('edit_back') }}">
+			<button class="button-6-secondary">Next</button>
+		</a>
+	</div>
+
+	<!-- Initialize Label Studio -->
+	<script>
+		var labelStudio = new LabelStudio("label-studio", {
+			config: `
 				<View>
 					<Image name="image" value="$image" zoom="true" rotateControl="true" zoomControl="true"/>
 					<BrushLabels name="tag" toName="image">
@@ -62,7 +69,7 @@
 						<Label value="Scapula" background="rgba(224, 131, 46, 0.7)"/>
 						<Label value="Sternum" background="rgba(129, 64, 4, 0.7)"/>
 						<Label value="Humerus" background="rgba(14, 24, 156, 0.7)"/>
-						<Label value="Lumbar Vert" background="rgba(235, 210, 52, 10.7)"/>
+						<Label value="Lumbar Vert" background="rgba(235, 210, 52, 0.7)"/>
 						<Label value="Sacrum" background="rgba(255, 122, 0, 0.7)"/>
 						<Label value="Pelvis" background="rgba(16, 119, 7, 0.7)"/>
 						<Label value="Femur" background="rgba(225, 235, 52, 0.7)"/>
@@ -70,77 +77,78 @@
 				</View>
 			  `,
 
-				interfaces: ["update", "controls", "side-column", "annotations:menu"],
+			interfaces: ["update", "controls", "side-column", "annotations:menu"],
 
-				user: {
-					pk: 1,
-					firstName: "Admin",
-					lastName: "Admin",
+			user: {
+				pk: 1,
+				firstName: "Admin",
+				lastName: "Admin",
+			},
+			task: {
+				annotations: [],
+				predictions: [],
+				id: 1,
+				data: {
+					image: "{{ url_for('static', filename='img_front_result.png') }}",
 				},
-				task: {
-					annotations: [],
-					predictions: [],
-					id: 1,
-					data: {
-						image: "{{ url_for('static', filename='img_front_result.png') }}",
+			},
+
+			onLabelStudioLoad: function (LS) {
+				var c = LS.annotationStore.addAnnotation({
+					userGenerate: true,
+				});
+				LS.annotationStore.selectAnnotation(c.id);
+			},
+
+			onUpdateAnnotation: function (LS, annotation) {
+				fetch("/export_front", {
+					headers: {
+						"Content-Type": "application/json",
 					},
-				},
-
-				onLabelStudioLoad: function (LS) {
-					var c = LS.annotationStore.addAnnotation({
-						userGenerate: true,
+					method: "POST",
+					body: JSON.stringify(annotation.serializeAnnotation()),
+				})
+					.then(function (response) {
+						if (response.ok) {
+							response.json().then(function (response) {
+								alert("Annotation updated successfully!");
+								console.log(response);
+							});
+						} else {
+							throw Error("Something went wrong");
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
 					});
-					LS.annotationStore.selectAnnotation(c.id);
-				},
+				console.log(annotation.serializeAnnotation());
+			},
 
-				onUpdateAnnotation: function (LS, annotation) {
-					fetch("/export_front", {
-						headers: {
-							"Content-Type": "application/json",
-						},
-						method: "POST",
-						body: JSON.stringify(annotation.serializeAnnotation()),
+			onSubmitAnnotation: function (LS, annotation) {
+				fetch("/export_front", {
+					headers: {
+						"Content-Type": "application/json",
+					},
+					method: "POST",
+					body: JSON.stringify(annotation.serializeAnnotation()),
+				})
+					.then(function (response) {
+						if (response.ok) {
+							response.json().then(function (response) {
+								alert("Annotation saved successfully!");
+								console.log(response);
+							});
+						} else {
+							throw Error("Something went wrong");
+						}
 					})
-						.then(function (response) {
-							if (response.ok) {
-								response.json().then(function (response) {
-									alert("Annotasi berhasil diupdate!");
-									console.log(response);
-								});
-							} else {
-								throw Error("Something went wrong");
-							}
-						})
-						.catch(function (error) {
-							console.log(error);
-						});
-					console.log(annotation.serializeAnnotation());
-				},
+					.catch(function (error) {
+						console.log(error);
+					});
+				console.log(annotation.serializeAnnotation());
+			},
+		});
+	</script>
+</body>
 
-				onSubmitAnnotation: function (LS, annotation) {
-					fetch("/export_front", {
-						headers: {
-							"Content-Type": "application/json",
-						},
-						method: "POST",
-						body: JSON.stringify(annotation.serializeAnnotation()),
-					})
-						.then(function (response) {
-							if (response.ok) {
-								response.json().then(function (response) {
-									alert("Annotasi berhasil disimpan!");
-									console.log(response);
-								});
-							} else {
-								throw Error("Something went wrong");
-							}
-						})
-						.catch(function (error) {
-							console.log(error);
-						});
-					console.log(annotation.serializeAnnotation());
-				},
-			});
-		</script>
-	</body>
 </html>

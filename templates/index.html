@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <title>Home | Kupu Web Module</title>
+
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+  <script src="/static/js/config.js"></script>
+
+  <script defer src="/static/js/logout.js"></script>
+  <script defer src="/static/js/loader.js"></script>
+
+  <link rel="stylesheet" href="/static/style/styles.css" />
+
+  <!-- filepond -->
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="header">
+    <div>
+      <div class="header-text">Kupu Web Module</div>
+      <div class="header-ver">v0.1 (demo)</div>
+    </div>
+    <div>
+      <div class="header-text">Hi, Ema Rachma</div>
+      <button type="button" class="header-button" id="signOut" onclick="signOut()">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="box" id="v-default">
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_img') }}">
+      <h1>Upload Images</h1>
+
+      <div class="box-upload">
+        <div>
+          <label>Image Front</label>
+          <hr />
+          <input type="file" name="img_front" id="img_front" required />
+        </div>
+        <div>
+          <label>Image Back</label>
+          <hr />
+          <input type="file" name="img_back" id="img_back" required />
+        </div>
+      </div>
+
+      <button type="submit" class="button-17" id="button-content" onclick="loader()">
+        Start Segmentation!
+      </button>
+      <span class="loader" id="button-loader"></span>
+    </form>
+  </div>
+
+  <span class="box" id="v-signout">
+    <h1>Signing Out...</h1>
+  </span>
+
+  <!-- filepond -->
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+  <script src="/static/js/filepond-config.js"></script>
+</body>
+
+</html>

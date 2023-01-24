@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+	<title>Result | Kupu Web Module</title>
+
+	<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+	<script src="/static/js/config.js"></script>
+
+	<link rel="stylesheet" href="/static/style/styles.css" />
+	<script defer src="/static/js/logout.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div>
+			<div class="header-text">Kupu Web Module</div>
+			<div class="header-ver">v0.1 (demo)</div>
+		</div>
+		<div>
+			<div class="header-text">Hi, Ema Rachma</div>
+			<button type="button" class="header-button" id="signOut" onclick="signOut()">
+				Logout
+			</button>
+		</div>
+	</div>
+
+	<div class="box" id="v-default">
+		<div class="box-upload">
+			<div>
+				<img src="/static/final_front.png" class="result-img" />
+			</div>
+			<div>
+				<img src="/static/final_back.png" class="result-img" />
+			</div>
+		</div>
+		<a href="{{ url_for('index') }}">
+			<button class="button-6">Re-annotate!</button>
+		</a>
+		<a href="#">
+			<button class="button-6-secondary" onclick="save_result()">
+				Save result
+			</button>
+		</a>
+	</div>
+
+	<span class="box" id="v-signout">
+		<h1>Signing Out...</h1>
+	</span>
+
+	<!-- <script>
+			function save_result() {
+				if (confirm("Save the result?") == true) {
+					alert("Thank you. Your annotation has been saved!");
+					window.location = `/save_result`;
+				} else {
+					console.log("ini cancel");
+				}
+			}
+		</script> -->
+</body>
+
+</html>
