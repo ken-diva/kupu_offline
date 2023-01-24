@@ -1,4 +1,4 @@
-# 🚧 KUPU WEB MODULE 🚧
+# 🚧 KUPU WEB MODULE | OFFLINE VERSION 🚧
 
 v0.1 - Demo purpose only ⚠️
 
