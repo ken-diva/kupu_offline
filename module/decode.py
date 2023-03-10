@@ -69,7 +69,9 @@ def decode_rle(rle, print_params: bool = False):
 def convert_to_png(path, pos):
   """ Convert the .json from brushlabels
   
-  Args: json_path = path to the json file from frontend module
+  Args: 
+    json_path = path to the json file from frontend module
+    pos = ANT or POST (depan / belakang)
   """
   f = open(path)
   data = json.load(f)
@@ -87,7 +89,6 @@ def convert_to_png(path, pos):
       img = Image.fromarray(decoded_rle).convert('RGBA')
 
       img_data = img.getdata()
-      print(img_name)
 
       # for coloring purpose
       if img_name == 'Skull':

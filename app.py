@@ -44,7 +44,6 @@ def export_front():
   jsonData = request.get_json()
   with open('./static/json_annotation/img_front.json', 'w') as f:
     json.dump(jsonData, f)
-  print(jsonData)
   return {
     'response' : 'export front success'
   }
@@ -54,7 +53,6 @@ def export_back():
   jsonData = request.get_json()
   with open('./static/json_annotation/img_back.json', 'w') as f:
     json.dump(jsonData, f)
-  print(jsonData)
   return {
     'response' : 'export back success'
   }
@@ -69,7 +67,8 @@ def decode():
 
 @app.route('/decode_result')
 def decode_result():
-    img = Image.open('upload/img/img_front.png')
+    # img = Image.open('upload/img/img_front.png')
+    img = Image.open('static/img_front_result.png')
     # response = requests.get(decoded_front)
     # img_decoded = Image.open('upload\img\img_front.png')
     img_decoded = Image.open('image_front_done.png')
