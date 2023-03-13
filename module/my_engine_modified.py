@@ -59,10 +59,6 @@ def render_data(img_front, img_back):
         if i == 0: y_predv = tmp + 0
         else: y_predv = torch.cat([y_predv, tmp], axis=0)
 
-    # stop = timeit.default_timer()
-
-    # print('Time: ', stop - start)
-
     # ini warna
     cp = {
         0 : [1.0       , 1.0       , 1.0       ],
@@ -107,10 +103,11 @@ def render_data(img_front, img_back):
     
     # depan
     # plt.subplot(2, n*2, (2*i)+1)
-    ax.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
-    ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
+    # ax.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
+    # ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=0.5)
+    ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=1)
 
-    plt.savefig('./static/img_front_result.png')
+    plt.savefig('./static/coba3333.png')
 
     # belakang
     # plt.subplot(2, n*2, (2*i)+2)
