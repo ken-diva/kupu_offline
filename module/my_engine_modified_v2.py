@@ -109,11 +109,44 @@ def render_data(img_front, img_back):
     # ax.imshow(X_valid[vl_idx[i]][0].permute(1, 2, 0))
     ax.imshow(map_clr(y_predv[vl_idx[i]][0].argmax(axis=0).numpy()), alpha=1)
 
-    plt.savefig('./static/coba.png')
+    plt.savefig('./static/crop_img/coba_f.png')
 
     # belakang
     # plt.subplot(2, n*2, (2*i)+2)
     ax.imshow(X_valid[vl_idx[i]][1].permute(1, 2, 0))
-    ax.imshow(map_clr(y_predv[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=0.5)
+    ax.imshow(map_clr(y_predv[vl_idx[i]][1].argmax(axis=0).numpy()), alpha=1)
 
-    plt.savefig('./static/img_back_result.png')
+    plt.savefig('./static/crop_img/coba_b.png')
+
+def crop_image():
+    img = Image.open('../../static/crop_img/coba_b.png')
+    img = img.convert("RGBA")
+
+    d = img.getdata()
+
+    # todo
+    # 1. crop perbagian warna
+    # 2. masukin ke folder, per-bagian per-gambar
+    # 3. print hasil jadi (yg dari modul)
+    # 4. pakai if, kalau sama yg dari folder ngga di merge
+    # 5. hasil modul + sisa dari folder di merge
+    # 6. tampilin gambar di hasil akhir
+
+    # print(list(range(0,100)))
+    new_image = []
+    for item in d:
+
+        print(item[0])
+
+        # dibagi per r,g,b, warna selisih 1 aja dari daftar warna
+        # warnanya kelipatan 17 karena 255/15 = 17
+        if item[0] in list(range(136,137)) and item[1] in list(range(136,137)) and item[2] in list(range(136,137)):
+            new_image.append((173, 0, 75))
+        else:
+            new_image.append((255,255,255))
+            
+    # update image data
+    img.putdata(new_image)
+
+    # save new image
+    img.save("coba_diubah.png")
