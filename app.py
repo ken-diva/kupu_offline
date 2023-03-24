@@ -28,7 +28,10 @@ def upload_img():
   img_back_filename = 'img_back' + '.' + img_back.filename.split('.')[1]
   img_back.save(os.path.join(app.config['UPLOAD_FOLDER'], img_back_filename))
 
-  engine.render_data(img_front_filename, img_back_filename)
+  engine.render_data(img_front_filename, img_back_filename, "normal")
+  engine.render_data(img_front_filename, img_back_filename, "cropped")
+  engine.crop("front")
+  engine.crop("back")
   return render_template('result.html')
 
 @app.route('/edit_front')
@@ -89,10 +92,6 @@ def decode_result():
     img.save("static/final_back.png")
 
     return render_template("final_result.html")
-
-@app.route('/coba')
-def coba():
-    return render_template('old/via_demo.html')
 
 if __name__ == '__main__':
   app.run(debug=True)
