@@ -71,25 +71,27 @@ def decode():
 @app.route('/decode_result')
 def decode_result():
     # img = Image.open('upload/img/img_front.png')
-    img = Image.open('static/img_front_result.png')
-    # response = requests.get(decoded_front)
-    # img_decoded = Image.open('upload\img\img_front.png')
-    img_decoded = Image.open('image_front_done.png')
+    # # img = Image.open('static/img_front_result.png')
+    # # response = requests.get(decoded_front)
+    # # img_decoded = Image.open('upload\img\img_front.png')
+    # img_decoded = Image.open('image_front_done.png')
 
-    # Pasting img2 image on top of img1 
-    # starting at coordinates (0, 0)
-    img.paste(img_decoded, (-35,8), mask=img_decoded)
-    img.save("static/final_front.png")
+    # # Pasting img2 image on top of img1 
+    # # starting at coordinates (0, 0)
+    # img.paste(img_decoded, (-35,8), mask=img_decoded)
+    # img.save("static/final_front.png")
 
-    img = Image.open('upload/img/img_back.png')
-    # response = requests.get(decoded_back)
-    # img_decoded = Image.open('upload\img\img_back.png')
-    img_decoded = Image.open('image_back_done.png')
+    # img = Image.open('upload/img/img_back.png')
+    # # response = requests.get(decoded_back)
+    # # img_decoded = Image.open('upload\img\img_back.png')
+    # img_decoded = Image.open('image_back_done.png')
 
-    # Pasting img2 image on top of img1 
-    # starting at coordinates (0, 0)
-    img.paste(img_decoded, (-35,8), mask=img_decoded)
-    img.save("static/final_back.png")
+    # # Pasting img2 image on top of img1 
+    # # starting at coordinates (0, 0)
+    # img.paste(img_decoded, (-35,8), mask=img_decoded)
+    # img.save("static/final_back.png")
+
+    engine.final_render()
 
     return render_template("final_result.html")
 

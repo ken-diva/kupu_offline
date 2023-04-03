@@ -1,6 +1,7 @@
 from module.btrfly import BtrflyNet
 from PIL import Image
 from torchvision import transforms
+from os.path import exists
 
 import matplotlib.pyplot as plt
 import torch
@@ -147,10 +148,10 @@ def crop(img_direction):
 
     if img_direction == "front":
         img_path = "./static/crop_img/crop_f.png"
-        save_path = "./static/crop_img/cropped_f/"
+        save_path = "./static/crop_img/front/"
     else:
         img_path = "./static/crop_img/crop_b.png"
-        save_path = "./static/crop_img/cropped_b/"
+        save_path = "./static/crop_img/back/"
 
     img = Image.open(img_path)
     img = img.convert("RGBA")
@@ -168,14 +169,103 @@ def crop(img_direction):
         img = img.convert("RGBA")
         for item in d:
             if item[2] in list(range(c,c+1)):
-                new_image.append((173, 0, 75))
+                if c == 0:
+                    new_image.append((21, 193, 78, 255))
+                elif c == 17:
+                    new_image.append((0, 121, 255, 255))
+                elif c == 34:
+                    new_image.append((0, 228, 255, 255))
+                elif c == 85:
+                    new_image.append((109, 21, 193, 255))
+                elif c == 51:
+                    new_image.append((228, 70, 206, 255))
+                elif c == 102:
+                    new_image.append((224, 131, 46, 255))
+                elif c == 68:
+                    new_image.append((129, 64, 4, 255))
+                elif c == 119:
+                    new_image.append((14, 24, 156, 255))
+                elif c == 136:
+                    new_image.append((166, 5, 29, 255))
+                elif c == 153:
+                    new_image.append((255, 122, 0, 255))
+                elif c == 170:
+                    new_image.append((16, 119, 7, 255))
+                elif c == 187:
+                    new_image.append((225, 235, 52, 255))
+                # new_image.append((55, 0, 75))
             else:
-                new_image.append((255,255,255))
+                new_image.append((255,255,255,0))
 
         # update image data
         img.putdata(new_image)
 
         # save new image
-        file_format = ".png"
-        img.save( save_path + bone_name[index_bone_name] + file_format)
+        # file_format = ".png"
+        # img.save( save_path + bone_name[index_bone_name] + file_format)
+        img.save(f"{save_path+bone_name[index_bone_name]}.png")
         index_bone_name += 1
+
+def final_render():
+    bone_name = ["Skull", "CervicalVert", "ThoracicVert", "Ribs", "Strenum", "Clavicle", "Scapula", "Humerus", "LumbarVert", "Sacrum", "Pelvis", "Femur"]
+
+    # img = Image.open('upload/img/img_front.png')
+
+    # # Pasting img2 image on top of img1 
+    # # starting at coordinates (0, 0)
+    # img.paste(img_decoded, (-35,8), mask=img_decoded)
+    # img.save("static/final_front.png")
+
+    # img = Image.open('upload/img/img_back.png')
+    # # response = requests.get(decoded_back)
+    # # img_decoded = Image.open('upload\img\img_back.png')
+    # img_decoded = Image.open('image_back_done.png')
+
+    # # Pasting img2 image on top of img1 
+    # # starting at coordinates (0, 0)
+    # img.paste(img_decoded, (-35,8), mask=img_decoded)
+    # img.save("static/final_back.png")
+
+    # make image list (back)
+    img_list = []
+    for b in bone_name:
+        if b == "Skull":
+            if exists(f'./static/img_annotation/back/{b}.png'):
+                img = Image.open(f'./static/img_annotation/back/{b}.png')
+            else:
+                img = Image.open(f'./static/crop_img/back/{b}.png')
+        else:
+            if exists(f'./static/img_annotation/back/{b}.png'):
+                img_list.append(Image.open(f'./static/img_annotation/back/{b}.png'))
+            else:
+                img_list.append(Image.open(f'./static/crop_img/back/{b}.png'))
+
+    # merge img list (back)
+    for i in range(len(img_list)):
+        img.paste(img_list[i], (0,0), mask=img_list[i])
+
+    img_raw = Image.open('upload/img/img_back.png').convert("RGBA")
+    img_raw.paste(img, (-35,5), mask=img)
+    img_raw.save("./static/final_back.png")
+
+    # make image list (front)
+    img_list = []
+    for b in bone_name:
+        if b == "Skull":
+            if exists(f'./static/img_annotation/front/{b}.png'):
+                img = Image.open(f'./static/img_annotation/front/{b}.png')
+            else:
+                img = Image.open(f'./static/crop_img/front/{b}.png')
+        else:
+            if exists(f'./static/img_annotation/front/{b}.png'):
+                img_list.append(Image.open(f'./static/img_annotation/front/{b}.png'))
+            else:
+                img_list.append(Image.open(f'./static/crop_img/front/{b}.png'))
+
+    # merge img list (front)
+    for i in range(len(img_list)):
+        img.paste(img_list[i], (0,0), mask=img_list[i])
+
+    img_raw = Image.open('upload/img/img_front.png').convert("RGBA")
+    img_raw.paste(img, (-35,5), mask=img)
+    img_raw.save("./static/final_front.png")

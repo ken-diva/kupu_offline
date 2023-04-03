@@ -79,95 +79,99 @@ def convert_to_png(path, pos):
   new_image = []
   for d in data:
 
-      width = d['original_width']
-      height = d['original_height']
-      brushlabels = str(d['value']['brushlabels'])
+    width = d['original_width']
+    height = d['original_height']
+    brushlabels = str(d['value']['brushlabels'])
 
-      img_name = brushlabels.translate({ord(i): None for i in "[' ']"})
-      decoded_rle = np.reshape(decode_rle(d['value']['rle']), [height, width, 4])[:, :, 3]
+    img_name = brushlabels.translate({ord(i): None for i in "[' ']"})
+    decoded_rle = np.reshape(decode_rle(d['value']['rle']), [height, width, 4])[:, :, 3]
 
-      img = Image.fromarray(decoded_rle).convert('RGBA')
+    img = Image.fromarray(decoded_rle).convert('RGBA')
 
-      img_data = img.getdata()
+    img_data = img.getdata()
 
-      # for coloring purpose
-      if img_name == 'Skull':
-          r, g, b, a = 21, 193, 78, 125
-      elif img_name == 'CervicalVert':
-          r, g, b, a = 0, 121, 255, 125
-      elif img_name == 'ThoracicVert':
-          r, g, b, a = 0, 228, 255, 125
-      elif img_name == 'Clavicle':
-          r, g, b, a = 109, 21, 193, 125
-      elif img_name == 'Ribs':
-          r, g, b, a = 228, 70, 206, 125
-      elif img_name == 'Scapula':
-          r, g, b, a = 224, 131, 46, 125
-      elif img_name == 'Sternum':
-          r, g, b, a = 129, 64, 4, 125
-      elif img_name == 'Humerus':
-          r, g, b, a = 14, 24, 156, 125
-      elif img_name == 'LumbarVert':
-          r, g, b, a = 166, 5, 29, 125
-      elif img_name == 'Sacrum':
-          r, g, b, a = 255, 122, 0, 125
-      elif img_name == 'Pelvis':
-          r, g, b, a = 16, 119, 7, 125
-      elif img_name == 'Femur':
-          r, g, b, a = 225, 235, 52, 125
-      else:
-          r, g, b, a = 255, 255, 255, 125
-      
-      # # only if using python 3.10
-      # match img_name:
-      #     case "Skull":
-      #       r, g, b, a = 21, 193, 78, 125
-      #     case "CervicalVert":
-      #       r, g, b, a = 0, 121, 255, 125
-      #     case "ThoracicVert":
-      #       r, g, b, a = 0, 228, 255, 125
-      #     case "Clavicle":
-      #       r, g, b, a = 109, 21, 193, 125
-      #     case "Ribs":
-      #       r, g, b, a = 228, 70, 206, 125
-      #     case "Scapula":
-      #       r, g, b, a = 224, 131, 46, 125
-      #     case "Sternum":
-      #       r, g, b, a = 129, 64, 4, 125
-      #     case "Humerus":
-      #       r, g, b, a = 14, 24, 156, 125
-      #     case "LumbarVert":
-      #       r, g, b, a = 166, 5, 29, 125
-      #     case "Sacrum":
-      #       r, g, b, a = 255, 122, 0, 125
-      #     case "Pelvis":
-      #       r, g, b, a = 16, 119, 7, 125
-      #     case "Femur":
-      #       r, g, b, a = 225, 235, 52, 125
-      #     case _:
-      #       r, g, b, a = 255, 255, 255, 125
+    # for coloring purpose
+    if img_name == 'Skull':
+        r, g, b, a = 21, 193, 78, 125
+    elif img_name == 'CervicalVert':
+        r, g, b, a = 0, 121, 255, 125
+    elif img_name == 'ThoracicVert':
+        r, g, b, a = 0, 228, 255, 125
+    elif img_name == 'Clavicle':
+        r, g, b, a = 109, 21, 193, 125
+    elif img_name == 'Ribs':
+        r, g, b, a = 228, 70, 206, 125
+    elif img_name == 'Scapula':
+        r, g, b, a = 224, 131, 46, 125
+    elif img_name == 'Sternum':
+        r, g, b, a = 129, 64, 4, 125
+    elif img_name == 'Humerus':
+        r, g, b, a = 14, 24, 156, 125
+    elif img_name == 'LumbarVert':
+        r, g, b, a = 166, 5, 29, 125
+    elif img_name == 'Sacrum':
+        r, g, b, a = 255, 122, 0, 125
+    elif img_name == 'Pelvis':
+        r, g, b, a = 16, 119, 7, 125
+    elif img_name == 'Femur':
+        r, g, b, a = 225, 235, 52, 125
+    else:
+        r, g, b, a = 255, 255, 255, 125
+    
+    # # only if using python 3.10
+    # match img_name:
+    #     case "Skull":
+    #       r, g, b, a = 21, 193, 78, 125
+    #     case "CervicalVert":
+    #       r, g, b, a = 0, 121, 255, 125
+    #     case "ThoracicVert":
+    #       r, g, b, a = 0, 228, 255, 125
+    #     case "Clavicle":
+    #       r, g, b, a = 109, 21, 193, 125
+    #     case "Ribs":
+    #       r, g, b, a = 228, 70, 206, 125
+    #     case "Scapula":
+    #       r, g, b, a = 224, 131, 46, 125
+    #     case "Sternum":
+    #       r, g, b, a = 129, 64, 4, 125
+    #     case "Humerus":
+    #       r, g, b, a = 14, 24, 156, 125
+    #     case "LumbarVert":
+    #       r, g, b, a = 166, 5, 29, 125
+    #     case "Sacrum":
+    #       r, g, b, a = 255, 122, 0, 125
+    #     case "Pelvis":
+    #       r, g, b, a = 16, 119, 7, 125
+    #     case "Femur":
+    #       r, g, b, a = 225, 235, 52, 125
+    #     case _:
+    #       r, g, b, a = 255, 255, 255, 125
 
-      # ini logic nya ke else dulu
-      if new_image:
-          i = 0
-          for item in img_data:
-              if item[0] in list(range(85, 256)):
-                  new_image[i] = ((r,g,b,a))
+    # ini logic nya ke else dulu
+    if new_image:
+        i = 0
+        for item in img_data:
+            if item[0] in list(range(85, 256)):
+                new_image[i] = ((r,g,b,a))
 
-              i = i + 1
+            i = i + 1
 
-      else:
-          for item in img_data:
-              if item[0] in list(range(10, 256)):
-                  new_image.append((r,g,b,a))
-              else:
-                  new_image.append((255,255,255,0))
+    else:
+        for item in img_data:
+            if item[0] in list(range(10, 256)):
+                new_image.append((r,g,b,a))
+            else:
+                new_image.append((255,255,255,0))
 
-  # update image data
-  img.putdata(new_image)
+    # update image data
+    img.putdata(new_image)
 
-  # save new image
-  if(pos == 'back'):
-    img.save("image_back_done.png")
-  else:
-    img.save("image_front_done.png")
+    # save new image
+    if(pos == 'back'):
+      img.save(f"./static/img_annotation/back/{img_name}.png")
+      # img.save("image_back_done.png")
+    else:
+      img.save(f"./static/img_annotation/front/{img_name}.png")
+      # img.save("image_front_done.png")
+
+    new_image = []

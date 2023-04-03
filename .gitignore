@@ -2,3 +2,7 @@ model
 __pycache__
 env/
 .vscode/
+static/crop_img/back/
+static/crop_img/front/
+static/img_annotation/back/
+static/img_annotation/front/
