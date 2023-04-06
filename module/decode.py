@@ -92,31 +92,31 @@ def convert_to_png(path, pos):
 
     # for coloring purpose
     if img_name == 'Skull':
-        r, g, b, a = 21, 193, 78, 125
+        r, g, b, a = 21, 193, 78, 190
     elif img_name == 'CervicalVert':
-        r, g, b, a = 0, 121, 255, 125
+        r, g, b, a = 0, 121, 255, 190
     elif img_name == 'ThoracicVert':
-        r, g, b, a = 0, 228, 255, 125
+        r, g, b, a = 0, 228, 255, 190
     elif img_name == 'Clavicle':
-        r, g, b, a = 109, 21, 193, 125
+        r, g, b, a = 109, 21, 193, 190
     elif img_name == 'Ribs':
-        r, g, b, a = 228, 70, 206, 125
+        r, g, b, a = 228, 70, 206, 190
     elif img_name == 'Scapula':
-        r, g, b, a = 224, 131, 46, 125
+        r, g, b, a = 224, 131, 46, 190
     elif img_name == 'Sternum':
-        r, g, b, a = 129, 64, 4, 125
+        r, g, b, a = 129, 64, 4, 190
     elif img_name == 'Humerus':
-        r, g, b, a = 14, 24, 156, 125
+        r, g, b, a = 14, 24, 156, 190
     elif img_name == 'LumbarVert':
-        r, g, b, a = 166, 5, 29, 125
+        r, g, b, a = 166, 5, 29, 190
     elif img_name == 'Sacrum':
-        r, g, b, a = 255, 122, 0, 125
+        r, g, b, a = 255, 122, 0, 190
     elif img_name == 'Pelvis':
-        r, g, b, a = 16, 119, 7, 125
+        r, g, b, a = 16, 119, 7, 190
     elif img_name == 'Femur':
-        r, g, b, a = 225, 235, 52, 125
+        r, g, b, a = 225, 235, 52, 190
     else:
-        r, g, b, a = 255, 255, 255, 125
+        r, g, b, a = 255, 255, 255, 190
     
     # # only if using python 3.10
     # match img_name:

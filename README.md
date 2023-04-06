@@ -16,7 +16,7 @@ For developer ☕
 - Run the app with `flask --debug run` command
   - `--debug` is optional and for convenient only 👌
 
-Note :notebook:
+Note 📓
 
 - Python version : [3.10.9](https://www.python.org/downloads/release/python-3109/)
 
