@@ -24,3 +24,10 @@ Resources 🏗️
 
 - [Label Studio](https://labelstud.io/)
 - [VGG Image Annotator (VIA)](https://www.robots.ox.ac.uk/~vgg/software/via/)
+
+Todo _May 2023_ 👷
+
+- Crop kiri kanan, jadi 2 gambar, olah di matrixnya, loop array dari atas ke bawah
+- hosting
+- testing sama user (usernya 5 mahasiswa bu ema)
+- clearing bug (kalo ada)
