@@ -97,15 +97,15 @@ def convert_to_png(path, pos):
         r, g, b, a = 0, 121, 255, 190
     elif img_name == 'ThoracicVert':
         r, g, b, a = 0, 228, 255, 190
-    elif img_name == 'Clavicle':
+    elif img_name == 'Clavicle_r' or img_name == 'Clavicle_l':
         r, g, b, a = 109, 21, 193, 190
     elif img_name == 'Ribs':
         r, g, b, a = 228, 70, 206, 190
-    elif img_name == 'Scapula':
+    elif img_name == 'Scapula_r' or img_name == 'Scapula_l':
         r, g, b, a = 224, 131, 46, 190
     elif img_name == 'Sternum':
         r, g, b, a = 129, 64, 4, 190
-    elif img_name == 'Humerus':
+    elif img_name == 'Humerus_r' and img_name == 'Humerus_l':
         r, g, b, a = 14, 24, 156, 190
     elif img_name == 'LumbarVert':
         r, g, b, a = 166, 5, 29, 190
@@ -113,7 +113,7 @@ def convert_to_png(path, pos):
         r, g, b, a = 255, 122, 0, 190
     elif img_name == 'Pelvis':
         r, g, b, a = 16, 119, 7, 190
-    elif img_name == 'Femur':
+    elif img_name == 'Femur_r' and img_name == 'Femur_l':
         r, g, b, a = 225, 235, 52, 190
     else:
         r, g, b, a = 255, 255, 255, 190

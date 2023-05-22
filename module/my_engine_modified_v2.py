@@ -158,41 +158,140 @@ def crop(img_direction):
 
     d = img.getdata()
 
-    bone_name = ["Skull", "CervicalVert", "ThoracicVert", "Ribs", "Strenum", "Clavicle", "Scapula", "Humerus", "LumbarVert", "Sacrum", "Pelvis", "Femur"]
+    # bone_name = ["Skull", "CervicalVert", "ThoracicVert", "Ribs", "Strenum", "Clavicle", "Scapula", "Humerus", "LumbarVert", "Sacrum", "Pelvis", "Femur"]
+    bone_name = ["Skull", 
+                "CervicalVert", 
+                "ThoracicVert", 
+                "Ribs", 
+                "Strenum", 
+                "Clavicle_r", 
+                "Clavicle_l", 
+                "Scapula_r", 
+                "Scapula_l", 
+                "Humerus_r", 
+                "Humerus_l", 
+                "LumbarVert", 
+                "Sacrum", 
+                "Pelvis", 
+                "Femur_r", 
+                "Femur_l"]
     color = [0, 17, 34, 51, 68, 85, 102, 119, 136, 153, 170, 187]
 
     index_bone_name = 0
 
-    for c in color:
+    for bone in bone_name:
         new_image = []
         img = Image.open(img_path)
         img = img.convert("RGBA")
+        # why 1? its stack perfectly for loop
+        # counter is for determine L & R from image; Splitted image = clavicle, scapula, humerus, femur
+        counter = 1
+
+        # determine color code
+        # ic = index_color
+        ic = 0
+        if bone == "Skull":
+            # 0
+            ic = color[0]
+        elif bone == "CervicalVert":
+            # 17
+            ic = color[1]
+        elif bone == "ThoracicVert":
+            # 34
+            ic = color[2]
+        elif bone == "Ribs":
+            # 51
+            ic = color[3]
+        elif bone == "Strenum":
+            # 68
+            ic = color[4]
+        elif bone == "Clavicle_r" or bone == "Clavicle_l":
+            # 85
+            ic = color[5]
+        elif bone == "Scapula_r" or bone == "Scapula_l":
+            # 102
+            ic = color[6]
+        elif bone == "Humerus_r" or bone == "Humerus_l":
+            # 119
+            ic = color[7]
+        elif bone == "LumbarVert":
+            # 136
+            ic = color[8]
+        elif bone == "Sacrum":
+            # 153
+            ic = color[9]
+        elif bone == "Pelvis":
+            # 170
+            ic = color[10]
+        elif bone == "Femur_r" or bone == "Femur_l":
+            # 187
+            ic = color[11]
+
+        # re-coloring the image
         for item in d:
-            if item[2] in list(range(c,c+1)):
-                if c == 0:
+            # reset the counter
+            if counter >= 200:
+                counter = 1
+            else:
+                counter+=1
+
+            if item[2] in list(range(ic,ic+1)):
+                if ic == 0:
                     new_image.append((21, 193, 78, 190))
-                elif c == 17:
+                elif ic == 17:
                     new_image.append((0, 121, 255, 190))
-                elif c == 34:
+                elif ic == 34:
                     new_image.append((0, 228, 255, 190))
-                elif c == 85:
-                    new_image.append((109, 21, 193, 190))
-                elif c == 51:
+
+                elif ic == 85:
+                    if counter <= 99 and "_r" in bone:
+                        new_image.append((14, 240, 156, 190))
+                    elif counter > 99 and "_l" in bone:
+                        new_image.append((14, 24, 250, 190))
+                    else:
+                        new_image.append((255,255,255,0))
+                    # new_image.append((109, 21, 193, 190))
+
+                elif ic == 51:
                     new_image.append((228, 70, 206, 190))
-                elif c == 102:
-                    new_image.append((224, 131, 46, 190))
-                elif c == 68:
+
+                elif ic == 102:
+                    if counter <= 99 and "_r" in bone:
+                        new_image.append((14, 240, 156, 190))
+                    elif counter > 99 and "_l" in bone:
+                        new_image.append((14, 24, 250, 190))
+                    else:
+                        new_image.append((255,255,255,0))
+                    # new_image.append((224, 131, 46, 190))
+                    
+                elif ic == 68:
                     new_image.append((129, 64, 4, 190))
-                elif c == 119:
-                    new_image.append((14, 24, 156, 190))
-                elif c == 136:
+
+                elif ic == 119:
+                    if counter <= 99 and "_r" in bone:
+                        new_image.append((14, 240, 156, 190))
+                    elif counter > 99 and "_l" in bone:
+                        new_image.append((14, 24, 250, 190))
+                    else:
+                        new_image.append((255,255,255,0))
+
+                    # new_image.append((14, 240, 156, 190))
+                        
+                elif ic == 136:
                     new_image.append((166, 5, 29, 190))
-                elif c == 153:
+                elif ic == 153:
                     new_image.append((255, 122, 0, 190))
-                elif c == 170:
+                elif ic == 170:
                     new_image.append((16, 119, 7, 190))
-                elif c == 187:
-                    new_image.append((225, 235, 52, 190))
+
+                elif ic == 187:
+                    if counter <= 99 and "_r" in bone:
+                        new_image.append((14, 240, 156, 190))
+                    elif counter > 99 and "_l" in bone:
+                        new_image.append((14, 24, 250, 190))
+                    else:
+                        new_image.append((255,255,255,0))
+                    # new_image.append((225, 235, 52, 190))
                 # new_image.append((55, 0, 75))
             else:
                 new_image.append((255,255,255,0))
@@ -201,13 +300,27 @@ def crop(img_direction):
         img.putdata(new_image)
 
         # save new image
-        # file_format = ".png"
-        # img.save( save_path + bone_name[index_bone_name] + file_format)
         img.save(f"{save_path+bone_name[index_bone_name]}.png")
         index_bone_name += 1
 
 def final_render():
-    bone_name = ["Skull", "CervicalVert", "ThoracicVert", "Ribs", "Strenum", "Clavicle", "Scapula", "Humerus", "LumbarVert", "Sacrum", "Pelvis", "Femur"]
+    # bone_name = ["Skull", "CervicalVert", "ThoracicVert", "Ribs", "Strenum", "Clavicle", "Scapula", "Humerus", "LumbarVert", "Sacrum", "Pelvis", "Femur"]
+    bone_name = ["Skull", 
+                "CervicalVert", 
+                "ThoracicVert", 
+                "Ribs", 
+                "Strenum", 
+                "Clavicle_r", 
+                "Clavicle_l", 
+                "Scapula_r", 
+                "Scapula_l", 
+                "Humerus_r", 
+                "Humerus_l", 
+                "LumbarVert", 
+                "Sacrum", 
+                "Pelvis", 
+                "Femur_r", 
+                "Femur_l"]
 
     # img = Image.open('upload/img/img_front.png')
 
