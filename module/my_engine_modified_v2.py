@@ -245,38 +245,34 @@ def crop(img_direction):
 
                 elif ic == 85:
                     if counter <= 99 and "_r" in bone:
-                        new_image.append((14, 240, 156, 190))
+                        new_image.append((109, 21, 193, 190))
                     elif counter > 99 and "_l" in bone:
-                        new_image.append((14, 24, 250, 190))
+                        new_image.append((109, 21, 193, 190))
                     else:
                         new_image.append((255,255,255,0))
-                    # new_image.append((109, 21, 193, 190))
 
                 elif ic == 51:
                     new_image.append((228, 70, 206, 190))
 
                 elif ic == 102:
                     if counter <= 99 and "_r" in bone:
-                        new_image.append((14, 240, 156, 190))
+                        new_image.append((224, 131, 46, 190))
                     elif counter > 99 and "_l" in bone:
-                        new_image.append((14, 24, 250, 190))
+                        new_image.append((224, 131, 46, 190))
                     else:
                         new_image.append((255,255,255,0))
-                    # new_image.append((224, 131, 46, 190))
                     
                 elif ic == 68:
                     new_image.append((129, 64, 4, 190))
 
                 elif ic == 119:
                     if counter <= 99 and "_r" in bone:
-                        new_image.append((14, 240, 156, 190))
+                        new_image.append((14, 24, 156, 190))
                     elif counter > 99 and "_l" in bone:
-                        new_image.append((14, 24, 250, 190))
+                        new_image.append((14, 24, 156, 190))
                     else:
                         new_image.append((255,255,255,0))
 
-                    # new_image.append((14, 240, 156, 190))
-                        
                 elif ic == 136:
                     new_image.append((166, 5, 29, 190))
                 elif ic == 153:
@@ -286,13 +282,11 @@ def crop(img_direction):
 
                 elif ic == 187:
                     if counter <= 99 and "_r" in bone:
-                        new_image.append((14, 240, 156, 190))
+                        new_image.append((225, 235, 52, 190))
                     elif counter > 99 and "_l" in bone:
-                        new_image.append((14, 24, 250, 190))
+                        new_image.append((225, 235, 52, 190))
                     else:
                         new_image.append((255,255,255,0))
-                    # new_image.append((225, 235, 52, 190))
-                # new_image.append((55, 0, 75))
             else:
                 new_image.append((255,255,255,0))
 
@@ -382,3 +376,29 @@ def final_render():
     img_raw = Image.open('upload/img/img_front.png').convert("RGBA")
     img_raw.paste(img, (-37,0), mask=img)
     img_raw.save("./static/final_front.png")
+
+    # if c == 0:
+    #     new_image.append((21, 193, 78, 190))
+    # elif c == 17:
+    #     new_image.append((0, 121, 255, 190))
+    # elif c == 34:
+    #     new_image.append((0, 228, 255, 190))
+    # elif c == 85:
+    #     new_image.append((109, 21, 193, 190))
+    # elif c == 51:
+    #     new_image.append((228, 70, 206, 190))
+    # elif c == 102:
+    #     new_image.append((224, 131, 46, 190))
+    # elif c == 68:
+    #     new_image.append((129, 64, 4, 190))
+    # elif c == 119:
+    #     new_image.append((14, 24, 156, 190))
+    # elif c == 136:
+    #     new_image.append((166, 5, 29, 190))
+    # elif c == 153:
+    #     new_image.append((255, 122, 0, 190))
+    # elif c == 170:
+    #     new_image.append((16, 119, 7, 190))
+    # elif c == 187:
+    #     new_image.append((225, 235, 52, 190))
+    # # new_image.append((55, 0, 75))
