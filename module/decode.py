@@ -98,17 +98,14 @@ def convert_to_png(path, pos):
     elif img_name == 'ThoracicVert':
         r, g, b, a = 0, 228, 255, 190
     elif img_name == 'Clavicle_r' or img_name == 'Clavicle_l':
-        print("masuk clavicle")
         r, g, b, a = 109, 21, 193, 190
     elif img_name == 'Ribs':
         r, g, b, a = 228, 70, 206, 190
     elif img_name == 'Scapula_r' or img_name == 'Scapula_l':
-        print("masuk scapula")
         r, g, b, a = 224, 131, 46, 190
     elif img_name == 'Sternum':
         r, g, b, a = 129, 64, 4, 190
     elif img_name == 'Humerus_r' or img_name == 'Humerus_l':
-        print("masuk humerus")
         r, g, b, a = 14, 24, 156, 190
     elif img_name == 'LumbarVert':
         r, g, b, a = 166, 5, 29, 190
@@ -117,7 +114,6 @@ def convert_to_png(path, pos):
     elif img_name == 'Pelvis':
         r, g, b, a = 16, 119, 7, 190
     elif img_name == 'Femur_r' or img_name == 'Femur_l':
-        print("masuk femur")
         r, g, b, a = 225, 235, 52, 190
     else:
         r, g, b, a = 255, 255, 255, 190
@@ -173,9 +169,7 @@ def convert_to_png(path, pos):
     # save new image
     if(pos == 'back'):
       img.save(f"./static/img_annotation/back/{img_name}.png")
-      # img.save("image_back_done.png")
     else:
       img.save(f"./static/img_annotation/front/{img_name}.png")
-      # img.save("image_front_done.png")
 
     new_image = []
