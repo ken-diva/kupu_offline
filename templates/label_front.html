@@ -44,7 +44,12 @@
 		<h1>Signing Out...</h1>
 	</span>
 
+	<div class="contoh-gambar">
+		<!-- <img src="/static/contoh-gambar.jpg" alt="contoh-gambar" width="75%"> -->
+	</div>
+
 	<div class="box-annotation">
+		<img src="/static/contoh-gambar.jpg" alt="contoh-gambar" width="25%" class="contoh-gambar">
 		<div id="label-studio"></div>
 	</div>
 
@@ -59,24 +64,24 @@
 		var labelStudio = new LabelStudio("label-studio", {
 			config: `
 				<View>
-					<Image name="image" value="$image" zoom="true" rotateControl="true" zoomControl="true"/>
+					<Image name="image" value="$image" zoom="true" rotateControl="true" zoomControl="true" horizontalAlignment="center" />
 					<BrushLabels name="tag" toName="image">
 						<Label value="Skull" background="rgba(21, 193, 78, 0.7)"/>
 						<Label value="Cervical Vert" background="rgba(0, 121, 255, 0.7)"/>
 						<Label value="Thoracic Vert" background="rgba(0, 228, 255, 0.7)"/>
-						<Label value="Clavicle_r" background="rgba(109, 21, 193, 0.7)"/>
-						<Label value="Clavicle_l" background="rgba(109, 21, 193, 0.7)"/>
+						<Label value="R_Clavicle" background="rgba(109, 21, 193, 0.7)"/>
+						<Label value="L_Clavicle" background="rgba(109, 21, 193, 0.7)"/>
 						<Label value="Ribs" background="rgba(228, 70, 206, 0.7)"/>
-						<Label value="Scapula_r" background="rgba(224, 131, 46, 0.7)"/>
-						<Label value="Scapula_l" background="rgba(224, 131, 46, 0.7)"/>
+						<Label value="R_Scapula" background="rgba(224, 131, 46, 0.7)"/>
+						<Label value="L_Scapula" background="rgba(224, 131, 46, 0.7)"/>
 						<Label value="Sternum" background="rgba(129, 64, 4, 0.7)"/>
-						<Label value="Humerus_r" background="rgba(14, 24, 156, 0.7)"/>
-						<Label value="Humerus_l" background="rgba(14, 24, 156, 0.7)"/>
+						<Label value="R_Humerus" background="rgba(14, 24, 156, 0.7)"/>
+						<Label value="L_Humerus" background="rgba(14, 24, 156, 0.7)"/>
 						<Label value="Lumbar Vert" background="rgba(235, 210, 52, 0.7)"/>
 						<Label value="Sacrum" background="rgba(255, 122, 0, 0.7)"/>
 						<Label value="Pelvis" background="rgba(16, 119, 7, 0.7)"/>
-						<Label value="Femur_r" background="rgba(225, 235, 52, 0.7)"/>
-						<Label value="Femur_l" background="rgba(225, 235, 52, 0.7)"/>
+						<Label value="R_Femur" background="rgba(225, 235, 52, 0.7)"/>
+						<Label value="L_Femur" background="rgba(225, 235, 52, 0.7)"/>
 					</BrushLabels>
 				</View>
 			  `,

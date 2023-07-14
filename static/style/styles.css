@@ -74,6 +74,11 @@ a {
 		0 4px 10px 0 rgba(37, 57, 231, 0.19);
 }
 
+.contoh-gambar {
+	margin-right: 20px;
+	align-self: flex-start;
+}
+
 .box {
 	margin-top: 40px;
 	text-align: center;
@@ -94,8 +99,9 @@ a {
 
 .box-annotation {
 	display: flex;
+	align-self: flex-start;
 	justify-content: center;
-	align-items: center;
+	align-items: top;
 
 	/* margin: auto;
 	width: 50%;
