@@ -43,7 +43,7 @@
 			<button class="button-6">Re-annotate!</button>
 		</a>
 		<a href="#">
-			<button class="button-6-secondary" onclick="save_result()">
+			<button class="button-6-secondary" onclick="saveImages()">
 				Save result
 			</button>
 		</a>
@@ -62,7 +62,48 @@
 					console.log("ini cancel");
 				}
 			}
-		</script> -->
+	</script> -->
+	<script>
+		function saveImages() {
+			// Create temporary canvas elements
+			const canvasFront = document.createElement("canvas");
+			const canvasBack = document.createElement("canvas");
+
+			// Get the image elements
+			const imageFront = document.querySelector(".result-img[src='/static/final_front.png']");
+			const imageBack = document.querySelector(".result-img[src='/static/final_back.png']");
+
+			// Set canvas dimensions to match image dimensions
+			canvasFront.width = imageFront.width;
+			canvasFront.height = imageFront.height;
+			canvasBack.width = imageBack.width;
+			canvasBack.height = imageBack.height;
+
+			const contextFront = canvasFront.getContext("2d");
+			const contextBack = canvasBack.getContext("2d");
+
+			// Draw the images onto the canvases
+			contextFront.drawImage(imageFront, 0, 0);
+			contextBack.drawImage(imageBack, 0, 0);
+
+			// Convert the canvases to image files
+			const frontImageURL = canvasFront.toDataURL("image/png");
+			const backImageURL = canvasBack.toDataURL("image/png");
+
+			// Trigger the download of the images
+			const downloadFrontLink = document.createElement("a");
+			const downloadBackLink = document.createElement("a");
+
+			downloadFrontLink.href = frontImageURL;
+			downloadFrontLink.download = "final_front.png";
+			downloadBackLink.href = backImageURL;
+			downloadBackLink.download = "final_back.png";
+
+			// Trigger the download
+			downloadFrontLink.click();
+			downloadBackLink.click();
+		}
+	</script>
 </body>
 
 </html>
