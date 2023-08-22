@@ -65,8 +65,8 @@ def export_back():
 
 @app.route("/decode")
 def decode():
-    decoder.convert_to_png("static\json_annotation\img_front.json", "front")
-    decoder.convert_to_png("static\json_annotation\img_back.json", "back")
+    decoder.convert_to_png("static/json_annotation/img_front.json", "front")
+    decoder.convert_to_png("static/json_annotation/img_back.json", "back")
 
     return redirect(url_for("decode_result"))
 
@@ -100,4 +100,4 @@ def decode_result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=int(os.environ.get("PORT", 8080)),host='0.0.0.0',debug=True)

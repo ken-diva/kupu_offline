@@ -3,6 +3,7 @@ __pycache__
 env/
 venv/
 .vscode/
+model/
 # static/crop_img/back/
 # static/crop_img/front/
 # static/img_annotation/back/
